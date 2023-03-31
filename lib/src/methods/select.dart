@@ -30,7 +30,7 @@ class Select {
   Future<Object?> get() async {
     var res = await execute!(query);
     if (transform != null) {
-      return transform!(res[0]['result'][0]);
+      return res[0]['result'].map((e) => transform!(e)).toList();
     }
 
     return res;
