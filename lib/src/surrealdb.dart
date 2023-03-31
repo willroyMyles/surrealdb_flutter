@@ -160,6 +160,12 @@ class SurrealDB {
     return [];
   }
 
+  /// Selects all records in a table, or a specific record, from the database.
+  /// @param thing - The table name or a record ID to select.
+  Future<Object?> get<T>({String? query, Map<String, Object?>? vars}) async {
+    return this.query(query!, vars);
+  }
+
   // Future<List<T>> selectTyped<T>(String table, T type) async {
   //   try {
   //     // call fromjson method from generic type
@@ -241,3 +247,6 @@ class SurrealDB {
     ]);
   }
 }
+
+SurrealDB _db = SurrealDB("url");
+SurrealDB get surrealClient => _db;
