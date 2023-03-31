@@ -250,6 +250,3 @@ class SurrealDB {
     ]);
   }
 }
-
-SurrealDB _db = SurrealDB("url");
-SurrealDB get surrealClient => _db;

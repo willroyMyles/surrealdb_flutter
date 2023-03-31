@@ -1,12 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:surrealdb/surrealdb.dart';
 
 class Select {
   String table;
   String query;
+  Function? execute;
   Select({
     this.table = '',
     this.query = '',
+    this.execute,
   }) {
     query = "select * from $table";
   }
@@ -26,10 +27,11 @@ class Select {
   }
 
   @override
-  String toString() => 'Select(table: $table, query: $query)';
+  String toString() =>
+      'Select(table: $table, query: $query, execute: $execute)';
 
   Future<Object?> get() {
-    return surrealClient.query(query);
+    return execute!(query);
   }
 }
 
