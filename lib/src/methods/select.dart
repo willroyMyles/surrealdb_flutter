@@ -4,11 +4,8 @@ class Select {
   String table;
   String query;
   Function? execute;
-  Select({
-    this.table = '',
-    this.query = '',
-    this.execute,
-  }) {
+  Function? transform;
+  Select({this.table = '', this.query = '', this.execute, this.transform}) {
     query = "select * from $table";
   }
 
@@ -30,8 +27,13 @@ class Select {
   String toString() =>
       'Select(table: $table, query: $query, execute: $execute)';
 
-  Future<Object?> get() {
-    return execute!(query);
+  Future<Object?> get() async {
+    var res = await execute!(query);
+    if (transform != null) {
+      return transform!(res[0]['result'][0]);
+    }
+
+    return res;
   }
 }
 
