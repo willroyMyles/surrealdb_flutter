@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:surrealdb/src/methods/select.dart';
 import 'package:surrealdb/src/pinger.dart';
 import 'package:surrealdb/src/surrealdb_options.dart';
 
@@ -162,8 +165,8 @@ class SurrealDB {
 
   /// Selects all records in a table, or a specific record, from the database.
   /// @param thing - The table name or a record ID to select.
-  Future<Object?> get<T>({String? query, Map<String, Object?>? vars}) async {
-    return this.query(query!, vars);
+  FutureOr<Select> get<T>({String? table}) async {
+    return Select(table: table ?? "");
   }
 
   // Future<List<T>> selectTyped<T>(String table, T type) async {
