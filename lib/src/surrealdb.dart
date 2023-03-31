@@ -170,20 +170,16 @@ class SurrealDB {
         table: table ?? "", execute: this.query, transform: transfrom);
   }
 
-  // Future<List<T>> selectTyped<T>(String table, T type) async {
-  //   try {
-  //     // call fromjson method from generic type
-  //     var res = await _wsService.rpc('select', [table]);
-  //     if (res is List) {
-  //       return res.map((e) => (type as dynamic).fromJson(e)).toList()
-  //           as List<T>;
-  //     } else {
-  //       return (type as dynamic).fromJson(res);
-  //     }
-  //   } on NoSuchMethodError catch (_) {
-  //     throw Exception('data must be a class with fromJson() method');
-  //   }
-  // }
+  Future<Object?> relate(
+      {required String incoming,
+      required String relation,
+      String? outgoing,
+      Map<String, Object>? data}) async {
+    assert(outgoing != null && data != null);
+    var query = "relate $incoming->$relation->${outgoing ?? data}";
+
+    return this.query(query);
+  }
 
   /// Runs a set of SurrealQL statements against the database.
   /// @param query - Specifies the SurrealQL statements.
