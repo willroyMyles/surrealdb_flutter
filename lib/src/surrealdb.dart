@@ -166,7 +166,7 @@ class SurrealDB {
   /// Selects all records in a table, or a specific record, from the database.
   /// @param thing - The table name or a record ID to select.
   Select construct({String? table}) {
-    return Select(table: table ?? "");
+    return Select(table: table ?? "", execute: this.query);
   }
 
   // Future<List<T>> selectTyped<T>(String table, T type) async {
